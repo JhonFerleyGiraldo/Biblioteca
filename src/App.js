@@ -5,8 +5,7 @@ import {
   Routes
 } from "react-router-dom";
 import NavBarComponent from './Components/NavBarComponent'
-
-
+import Home from "./Pages/Home";
 
 function App() {
   return (
@@ -14,7 +13,8 @@ function App() {
     <BrowserRouter>
       <NavBarComponent/>
       <Routes>
-        <Route path="/" Component={Libros} />
+        <Route path="/Libros" Component={Libros} />
+        <Route exact path="/" Component={Home} />
       </Routes>
     </BrowserRouter>
       

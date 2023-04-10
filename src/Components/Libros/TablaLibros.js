@@ -37,12 +37,11 @@ const TablaLibros = (props) => {
                         <h3>Listado Libros</h3>
                     </div>
                 </div>
-                <hr/>
                 <div className='row'>
                     <div className='col-2'>
                     </div>
                     <div className='col'>
-                        <table className="table">
+                        <table className="table mt-4">
                             <thead>
                                 <tr>
                                     <th scope="col">Id</th>

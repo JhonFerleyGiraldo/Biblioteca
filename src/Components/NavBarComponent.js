@@ -5,9 +5,9 @@ const NavBarComponent = () => {
 
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-info">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <h2 className="navbar-brand">DB App</h2>
+        <h2 className="navbar-brand">App Biblioteca</h2>
         <button
           className="navbar-toggler"
           type="button"
@@ -21,31 +21,22 @@ const NavBarComponent = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+          <li className="nav-item">
               <NavLink
                 className="nav-link"
                 aria-current="page"
-                to="/mans"
+                to="/"
               >
-                Mans
+                Home
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink
                 className="nav-link"
                 aria-current="page"
-                to="/womans"
+                to="/Libros"
               >
-                Womans
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                className="nav-link"
-                aria-current="page"
-                to="/search"
-              >
-                Search
+                Libros
               </NavLink>
             </li>
           </ul>

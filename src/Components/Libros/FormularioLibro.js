@@ -111,7 +111,7 @@ useEffect(()=>{
                     <div className='col-2'>
                     </div>
                     <div className='col'>
-                      <form onSubmit={(e)=>guardar(e)}>
+                      <form className='mt-4' onSubmit={(e)=>guardar(e)}>
                         <div className="form-group row">
                           <label className="col-sm-3 col-form-label">Nombre</label>
                           <div className="col-sm-3 text-left">
