@@ -92,8 +92,8 @@ export const deleteLibros = (id) => {
                 'Content-Type': 'application/json'
                 }
             })
-            .then((res) => console.log(res))
-            .then((data) => console.log(data))
+            .then((res) => res)
+            .then((data) => data)
             .catch(error =>{
                 Toast.fire({
                             icon: 'error',

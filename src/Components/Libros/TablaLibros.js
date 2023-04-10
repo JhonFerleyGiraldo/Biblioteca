@@ -8,6 +8,7 @@ const TablaLibros = (props) => {
 
     const {libros} = props
     const {seleccionarElemento} = props
+    const {obtenerLibros} = props
 
 
 
@@ -15,17 +16,16 @@ const TablaLibros = (props) => {
         seleccionarElemento(item)
     }
 
-    const eliminarItem = (id) => {
-
-        
+    const eliminarItem = async(id) => {
         ventanaEliminar(id).then(response => {
-            console.log(response)
             if(response){
-                deleteLibros(id)
+                deleteLibros(id).then(()=>obtenerLibros())
+                console.log('Eliminado')
                 Toast.fire({
                     icon: 'success',
                     title: 'Registro eliminado correctamente!'
                     })
+
             }
         })    
 
@@ -58,7 +58,7 @@ const TablaLibros = (props) => {
                             <tbody>
                                 {
                                     
-                                    libros !== null &&
+                                    libros &&
                                     libros.map((item)=>(
                                                 <tr key={item.id}>
                                                     <td>{item.id}</td>

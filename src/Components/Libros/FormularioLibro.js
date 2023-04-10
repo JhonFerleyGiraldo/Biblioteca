@@ -12,7 +12,7 @@ const FormularioLibro = (props) => {
   const [libro,setLibro] = useState(libroProp)
 
 
-const guardar = (e)=>{
+const guardar = async(e)=>{
   e.preventDefault()
 
   setLoading(true)
@@ -60,9 +60,11 @@ const guardar = (e)=>{
   }
   
   if(libro.id===0){
-    let resAdd = guardarLibro(libro)
+    await guardarLibro(libro)
+    console.log('Guardado')
   }else{
-    let resUpdate = updateLibro(libro)
+    await updateLibro(libro)
+    console.log('Editado')
   }
 
   

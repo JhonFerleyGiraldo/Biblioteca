@@ -21,15 +21,15 @@ const Libros = () => {
       })
 
     
-    const obtenerLibros = useCallback(async() =>{
+    const obtenerLibros = async() =>{
         const res = await getLibros()
         setLibros(res)
-        console.log('solicitud')
-    },[libros])
+    }
 
 
     useEffect(()=>{
         obtenerLibros()
+        console.log('efect libros')
     },[])
 
 
@@ -39,12 +39,12 @@ const Libros = () => {
 
 
     return (<>
-                <FormularioLibro libroProp={libro} obtenerLibros={()=>obtenerLibros()}/>
+                <FormularioLibro libroProp={libro} obtenerLibros={obtenerLibros}/>
                 {
                     libros === null ?
                     (<Cargando/>)
                     :
-                    <TablaLibros libros={libros} seleccionarElemento={(item)=>{editarElemento(item)}} />
+                    <TablaLibros libros={libros} obtenerLibros={obtenerLibros} seleccionarElemento={(item)=>{editarElemento(item)}} />
                 }
             </>)
 }
