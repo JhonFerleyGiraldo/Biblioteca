@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react'
 import {addLibro,updateLibro} from "../../Services/LibroService"
 import Cargando from "../Cargando";
 
-const FormularioLibro = (props) => {
+const FormularioLibro = ({libroProp,obtenerLibros}) => {
 
-  const {libroProp} = props
-  const {obtenerLibros} = props
   
   const [loading,setLoading] = useState(false)
   const [errores,setErrores] = useState([])

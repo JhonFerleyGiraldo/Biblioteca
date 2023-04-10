@@ -4,13 +4,7 @@ import {deleteLibros} from '../../Services/LibroService'
 import {Toast} from '../../SwalAlert'
 import { Link } from 'react-router-dom'
 
-const TablaLibros = (props) => {
-
-    const {libros} = props
-    const {seleccionarElemento} = props
-    const {obtenerLibros} = props
-
-
+const TablaLibros = ({libros,seleccionarElemento,obtenerLibros}) => {
 
     const seleccionarItem = (item) => {
         seleccionarElemento(item)
@@ -57,8 +51,11 @@ const TablaLibros = (props) => {
                             </thead>
                             <tbody>
                                 {
-                                    
-                                    libros &&
+
+                                    libros.length === 0
+                                    ?
+                                    (<span>No hay registros para mostrar</span>)
+                                    :
                                     libros.map((item)=>(
                                                 <tr key={item.id}>
                                                     <td>{item.id}</td>
