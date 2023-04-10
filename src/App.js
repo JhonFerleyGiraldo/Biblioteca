@@ -10,15 +10,13 @@ import Home from "./Pages/Home";
 function App() {
   return (
     <>
-    <BrowserRouter>
-      <NavBarComponent/>
-      <Routes>
-        <Route path="/Libros" Component={Libros} />
-        <Route exact path="/" Component={Home} />
-      </Routes>
-    </BrowserRouter>
-      
-       
+      <BrowserRouter>
+        <NavBarComponent/>
+        <Routes>
+          <Route path="/Libros" Component={Libros} />
+          <Route exact path="/" Component={Home} />
+        </Routes>
+      </BrowserRouter> 
     </>
   );
 }

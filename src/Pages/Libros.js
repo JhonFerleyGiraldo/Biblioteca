@@ -22,7 +22,6 @@ const Libros = () => {
 
     
     const obtenerLibros = useCallback(async() =>{
-       console.log('obt libr')
         const res = await getLibros()
         setLibros(res)
         console.log(res)
@@ -31,7 +30,7 @@ const Libros = () => {
 
     useEffect(()=>{
         obtenerLibros()
-    },[])
+    },[libros])
 
 
     const editarElemento = (item) => {
