@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import {getLibros} from "../Services/LibroService"
-import TablaLibros from "../Components/Libros/TablaLibros";
-import FormularioLibro from "../Components/Libros/FormularioLibro";
-import Toast from '../SwalAlert'
-import Cargando from "../Components/Cargando";
+import {getLibros} from "../../Services/LibroService"
+import TablaLibros from "../../Components/Libros/TablaLibros";
+import FormularioLibro from "../../Components/Libros/FormularioLibro";
+import Toast from '../../SwalAlert'
+import Cargando from "../../Components/Cargando";
 
 const Libros = () => {
 
@@ -24,21 +24,22 @@ const Libros = () => {
     const obtenerLibros = useCallback(async() =>{
         const res = await getLibros()
         setLibros(res)
-        console.log(res)
-    },[])
+        console.log('solicitud')
+    },[libros])
 
 
     useEffect(()=>{
         obtenerLibros()
-    },[libros])
+    },[])
 
 
     const editarElemento = (item) => {
         setLibro(item)
     }
 
+
     return (<>
-                <FormularioLibro libroProp={libro} obtenerLibros={()=>{obtenerLibros()}}/>
+                <FormularioLibro libroProp={libro} obtenerLibros={()=>obtenerLibros()}/>
                 {
                     libros === null ?
                     (<Cargando/>)

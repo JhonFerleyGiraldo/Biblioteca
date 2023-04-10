@@ -1,4 +1,3 @@
-import Libros from "./Pages/Libros";
 import {
   BrowserRouter,
   Route,
@@ -6,6 +5,8 @@ import {
 } from "react-router-dom";
 import NavBarComponent from './Components/NavBarComponent'
 import Home from "./Pages/Home";
+import Libros from "./Pages/Libros/Libros";
+import DetalleLibro from "./Pages/Libros/DetalleLibro";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <NavBarComponent/>
         <Routes>
           <Route path="/Libros" Component={Libros} />
+          <Route path="/DetalleLibro/:idLibro" Component={DetalleLibro} />
           <Route exact path="/" Component={Home} />
         </Routes>
       </BrowserRouter> 

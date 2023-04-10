@@ -2,6 +2,7 @@ import React from 'react'
 import {ventanaEliminar} from '../../SwalAlert'
 import {deleteLibros} from '../../Services/LibroService'
 import {Toast} from '../../SwalAlert'
+import { Link } from 'react-router-dom'
 
 const TablaLibros = (props) => {
 
@@ -31,6 +32,8 @@ const TablaLibros = (props) => {
 
     }
 
+
+
     return    (<>
                 <div className='row'>
                     <div className='col text-center'>
@@ -47,6 +50,7 @@ const TablaLibros = (props) => {
                                     <th scope="col">Id</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Autor</th>
+                                    <th scope="col">Detalle</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
                                 </tr>
@@ -61,7 +65,10 @@ const TablaLibros = (props) => {
                                                     <td>{item.nombre}</td>
                                                     <td>{item.autor}</td>
                                                     <td>
-                                                        <button className='btn btn-primary' onClick={()=>seleccionarItem(item)}>Editar</button>
+                                                        <Link className='btn btn-info' to={`/DetalleLibro/${item.id}`}>Detalle</Link>
+                                                    </td>
+                                                    <td>
+                                                        <button className='btn btn-success' onClick={()=>seleccionarItem(item)}>Editar</button>
                                                     </td>
                                                     <td>
                                                         <button className='btn btn-danger' onClick={()=>eliminarItem(item.id)}>Eliminar</button>

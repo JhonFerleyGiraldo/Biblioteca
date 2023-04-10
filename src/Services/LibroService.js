@@ -13,6 +13,18 @@ export const getLibros = () => {
             })
 }
 
+export const getLibro = (id) => {
+    return  fetch(urlApi + "Libros/" + id)
+            .then((res) => res.json())
+            .then((data) => data)
+            .catch(error =>{
+                Toast.fire({
+                            icon: 'error',
+                            title: error
+                            })
+            })
+}
+
 export const addLibro = (libro) => {
     return  fetch(urlApi + "Libros", {
                 method: 'POST',
