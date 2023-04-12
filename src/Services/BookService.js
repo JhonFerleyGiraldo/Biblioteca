@@ -1,7 +1,7 @@
 import {urlApi} from "../constantes"
 import Toast from '../SwalAlert'
 
-export const getLibros = () => {
+export const getBooksService = () => {
     return  fetch(urlApi + "Libros")
             .then((res) => res.json())
             .then((data) => data)
@@ -13,7 +13,7 @@ export const getLibros = () => {
             })
 }
 
-export const getLibro = (id) => {
+export const getBookService = (id) => {
     return  fetch(urlApi + "Libros/" + id)
             .then((res) => res.json())
             .then((data) => data)
@@ -25,7 +25,7 @@ export const getLibro = (id) => {
             })
 }
 
-export const addLibro = (libro) => {
+export const addBookService = (libro) => {
     return  fetch(urlApi + "Libros", {
                 method: 'POST',
                 body: JSON.stringify(libro),
@@ -55,7 +55,7 @@ export const addLibro = (libro) => {
             
 }
 
-export const updateLibro = (libro) => {
+export const updateBookService = (libro) => {
     return  fetch(urlApi + "Libros", {
                 method: 'PUT',
                 body: JSON.stringify(libro),
@@ -85,7 +85,7 @@ export const updateLibro = (libro) => {
             
 }
 
-export const deleteLibros = (id) => {
+export const deleteBookService = (id) => {
     return  fetch(urlApi + "Libros?idLibro=" + id,{
                 method: 'DELETE',
                 headers:{

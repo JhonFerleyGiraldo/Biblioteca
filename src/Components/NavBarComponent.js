@@ -39,6 +39,15 @@ const NavBarComponent = () => {
                 Libros
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                aria-current="page"
+                to="/Categorias"
+              >
+                Categorias
+              </NavLink>
+            </li>
           </ul>
           <div className="d-flex">
            

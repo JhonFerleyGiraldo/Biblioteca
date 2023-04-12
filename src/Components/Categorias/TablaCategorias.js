@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const TablaLibros = ({libros,selectEditBook,deleteData}) => {
+const TablaCategorias = ({categorias}) => {
 
     return    (<>
                 <div className='row'>
                     <div className='col text-center'>
-                        <h3>Listado Libros</h3>
+                        <h3>Listado Categorias</h3>
                     </div>
                 </div>
                 <div className='row'>
@@ -18,8 +18,6 @@ const TablaLibros = ({libros,selectEditBook,deleteData}) => {
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Nombre</th>
-                                    <th scope="col">Autor</th>
-                                    <th scope="col">Detalle</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
                                 </tr>
@@ -27,7 +25,7 @@ const TablaLibros = ({libros,selectEditBook,deleteData}) => {
                             <tbody>
                                 {
 
-                                    libros.length === 0
+                                    categorias.length === 0
                                     ?
                                     (
                                         <tr className='text-center'>
@@ -37,19 +35,15 @@ const TablaLibros = ({libros,selectEditBook,deleteData}) => {
                                         </tr>
                                     )
                                     :
-                                    libros.map((item)=>(
+                                    categorias.map((item)=>(
                                                 <tr key={item.id}>
                                                     <td>{item.id}</td>
                                                     <td>{item.nombre}</td>
-                                                    <td>{item.autor}</td>
                                                     <td>
-                                                        <Link className='btn btn-info' to={`/DetalleLibro/${item.id}`}>Detalle</Link>
+                                                        <button className='btn btn-success'>Editar</button>
                                                     </td>
                                                     <td>
-                                                        <button className='btn btn-success' onClick={()=>selectEditBook(item)}>Editar</button>
-                                                    </td>
-                                                    <td>
-                                                        <button className='btn btn-danger' onClick={()=>deleteData(item.id)}>Eliminar</button>
+                                                        <button className='btn btn-danger'>Eliminar</button>
                                                     </td>
                                                 </tr>
                                                 ))  
@@ -64,4 +58,4 @@ const TablaLibros = ({libros,selectEditBook,deleteData}) => {
             </>)
 }
 
-export default TablaLibros
+export default TablaCategorias

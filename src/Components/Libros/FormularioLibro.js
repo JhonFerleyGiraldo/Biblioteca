@@ -1,107 +1,91 @@
-import React, { useEffect, useState } from 'react'
-import {addLibro,updateLibro} from "../../Services/LibroService"
+import React, { useState } from 'react'
 import Cargando from "../Cargando";
 
-const FormularioLibro = ({libroProp,obtenerLibros}) => {
+const FormularioLibro = ({libroProp,setLibroProp,createData,updateData,categorias}) => {
 
-  
   const [loading,setLoading] = useState(false)
   const [errores,setErrores] = useState([])
-  const [libro,setLibro] = useState(libroProp)
 
+  const guardar = async(e)=>{
+    e.preventDefault()
 
-const guardar = async(e)=>{
-  e.preventDefault()
+    setLoading(true)
 
-  setLoading(true)
+    let errArray=[]
 
-  let errArray=[]
-
-  if(!libro.nombre.trim()){
-    errArray.push('El nombre es requerido.')
-  }
-
-  if(!libro.autor.trim()){
-    errArray.push('El autor es requerido.')
-  }
-
-  if(!libro.descripcion.trim()){
-    errArray.push('La descripción es requerida.')
-  }
-
-  if(!libro.editorial.trim()){
-    errArray.push('La editorial es requerida.')
-  }
-
-  
-
-  if(!libro.idioma.trim()){
-    errArray.push('El idioma es requerido.')
-  }
-
-  if(isNaN(libro.precio)){
-    if(!libro.precio.trim()){
-      errArray.push('El precio es requerido.')
+    if(!libroProp.nombre.trim()){
+      errArray.push('El nombre es requerido.')
     }
-  }
 
-  if(!libro.fechaPublicacion.trim()){
-    errArray.push('La fecha es requerida.')
-  }
+    if(!libroProp.autor.trim()){
+      errArray.push('El autor es requerido.')
+    }
 
-  //TODO: revisar porque no actualiza errores
-  setErrores(errArray)
+    if(!libroProp.descripcion.trim()){
+      errArray.push('La descripción es requerida.')
+    }
 
-  if(errArray.length > 0){
+    if(!libroProp.editorial.trim()){
+      errArray.push('La editorial es requerida.')
+    }
+
+    
+
+    if(!libroProp.idioma.trim()){
+      errArray.push('El idioma es requerido.')
+    }
+
+    if(isNaN(libroProp.precio)){
+      if(!libroProp.precio.trim()){
+        errArray.push('El precio es requerido.')
+      }
+    }
+
+    if(!libroProp.fechaPublicacion.trim()){
+      errArray.push('La fecha es requerida.')
+    }
+
+    //TODO: revisar porque no actualiza errores
+    setErrores(errArray)
+
+    if(errArray.length > 0){
+      setLoading(false)
+      return
+    }
+    
+    if(libroProp.id===0){
+      createData(libroProp)
+      console.log('Guardado')
+    }else{
+      updateData(libroProp)
+      console.log('Editado')
+    }
+
+    setLibroProp({
+      id:0,
+      nombre:'',
+      autor:'',
+      descripcion:'',
+      editorial:'',
+      idioma:'',
+      precio:0,
+      fechaPublicacion:'',
+      categoriaId:0
+    })
+
     setLoading(false)
-    return
-  }
-  
-  if(libro.id===0){
-    await guardarLibro(libro)
-    console.log('Guardado')
-  }else{
-    await updateLibro(libro)
-    console.log('Editado')
+
   }
 
-  
-
-  setLibro({
-    id:0,
-    nombre:'',
-    autor:'',
-    descripcion:'',
-    editorial:'',
-    idioma:'',
-    precio:'',
-    fechaPublicacion:''
-  })
-
-  obtenerLibros()
-
-  setLoading(false)
-
-}
-
-const guardarLibro = async(_libro) =>{
-  const res = await addLibro(_libro)
-  return res
-}
-
-const handleChange = (e) => {
-  setLibro({
-    ...libro,
-    [e.target.name]:e.target.value
-  })
-}
-
-useEffect(()=>{
-  libroProp.fechaPublicacion = libroProp.fechaPublicacion.split("T")[0];
-  setLibro(libroProp)
-},[libroProp])
+  const handleChange = (e) => {
+    setLibroProp({
+      ...libroProp,
+      [e.target.name]:e.target.value
+    })
+  }
 
   return  (<>
+  
                 <div className='row'>
                     <div className='col text-center'>
                         <h3>Formulario Libro</h3>
@@ -118,7 +102,7 @@ useEffect(()=>{
                             <input 
                               type="text" 
                               className="form-control " 
-                              value={libro.nombre} 
+                              value={libroProp.nombre} 
                               onChange={handleChange}
                               name='nombre'/>
                           </div>
@@ -127,7 +111,7 @@ useEffect(()=>{
                             <input 
                               type="text" 
                               className="form-control" 
-                              value={libro.autor} 
+                              value={libroProp.autor} 
                               onChange={handleChange}
                               name='autor'/>
                           </div>
@@ -138,7 +122,7 @@ useEffect(()=>{
                             <input 
                               type="text" 
                               className="form-control"
-                              value={libro.descripcion} 
+                              value={libroProp.descripcion} 
                               onChange={handleChange}
                               name='descripcion' />
                           </div>
@@ -147,7 +131,7 @@ useEffect(()=>{
                           <input 
                               type="text" 
                               className="form-control"
-                              value={libro.editorial} 
+                              value={libroProp.editorial} 
                               onChange={handleChange}
                               name='editorial' />
                           </div>
@@ -158,7 +142,7 @@ useEffect(()=>{
                           <input 
                               type="text" 
                               className="form-control"
-                              value={libro.idioma} 
+                              value={libroProp.idioma} 
                               onChange={handleChange}
                               name='idioma' />
                           </div>
@@ -167,7 +151,7 @@ useEffect(()=>{
                           <input 
                               type="number" 
                               className="form-control"
-                              value={libro.precio} 
+                              value={libroProp.precio} 
                               onChange={handleChange}
                               name='precio' />
                           </div>
@@ -178,11 +162,29 @@ useEffect(()=>{
                           <input 
                               type="date" 
                               className="form-control"
-                              value={libro.fechaPublicacion} 
+                              value={libroProp.fechaPublicacion.split("T")[0]} 
                               onChange={handleChange}
                               name='fechaPublicacion' />
                           </div>
-                          {
+                          <label className="col-sm-3 col-form-label">Categoria</label>
+                          <div className="col-sm-3">
+                          <select value={libroProp.categoriaId} className="form-control" name="categoriaId" onChange={handleChange}>
+                            <option value="0">--Seleccione--</option>
+                            {
+                              categorias &&
+                              categorias.map((item)=>(
+                                <option 
+                                  key={item.id} 
+                                  value={item.id}>
+                                  {item.nombre}
+                                </option>)
+                              )
+                            }
+                          </select>
+                          </div>
+                        </div>
+                        <div className="form-group row">
+                        {
                             loading ?
                             (<Cargando />)
                             :
@@ -191,11 +193,10 @@ useEffect(()=>{
                             <input 
                                 type="submit" 
                                 className="btn btn-success btn-block" 
-                                value={libro.id == 0 ? "Guardar" : "Editar"}
+                                value={libroProp.id == 0 ? "Guardar" : "Editar"}
                                 />
                             </div>)
                           }
-                          
                         </div>
                       </form>
                       {
@@ -214,6 +215,7 @@ useEffect(()=>{
                     <div className='col-2'>
                     </div>
                 </div>
+
           </>)
 }
 

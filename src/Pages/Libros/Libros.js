@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
-import {getLibros} from "../../Services/LibroService"
 import TablaLibros from "../../Components/Libros/TablaLibros";
 import FormularioLibro from "../../Components/Libros/FormularioLibro";
 import Toast from '../../SwalAlert'
 import Cargando from "../../Components/Cargando";
-
+import {ventanaEliminar} from '../../SwalAlert'
+import { getCategoriesService } from "../../Services/CategoryService";
+import {getBooksService,addBookService, updateBookService,deleteBookService} from "../../Services/BookService"
 const Libros = () => {
 
-
     const [libros,setLibros] = useState(null)
+    const [categorias,setcategorias] = useState(null)
     const [libro,setLibro] = useState({
         id:0,
         nombre:'',
@@ -16,35 +17,79 @@ const Libros = () => {
         descripcion:'',
         editorial:'',
         idioma:'',
-        precio:'',
-        fechaPublicacion:''
-      })
-
-    
-    const obtenerLibros = async() =>{
-        const res = await getLibros()
-        setLibros(res)
-    }
-
+        precio:0,
+        fechaPublicacion:'',
+        categoriaId:0
+    })
 
     useEffect(()=>{
-        obtenerLibros()
-        console.log('efect libros')
+        getBooks()
+        getCategories()
     },[])
 
-
-    const editarElemento = (item) => {
-        setLibro(item)
+    const getBooks = () =>{
+        getBooksService()
+            .then((res)=>{
+                setLibros(res)
+        }) 
     }
 
+    const createBook = (data) => {
+        addBookService(data)
+        .then((res)=>{
+            setLibros([...libros,res])
+        })
+    }
+
+    const updateBook = (data) => {
+        updateBookService(data)
+        .then((res)=>{
+            let newData = libros.map((x)=>(x.id === data.id ? data : x))
+            setLibros(newData)
+        })
+    }
+
+    const getCategories = () =>{
+        getCategoriesService()
+            .then((res)=>{  
+                setcategorias(res)
+        }) 
+    }
+
+    const deleteBook = (bookId) => {
+        ventanaEliminar(bookId).then(response => {
+            if(response){
+                deleteBookService(bookId)
+                .then((res)=>{
+                    let newData = libros.filter((x)=>x.id !== bookId)
+                    setLibros(newData)
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Registro eliminado correctamente!'
+                    })
+                })
+                
+
+            }
+        })  
+    }
 
     return (<>
-                <FormularioLibro libroProp={libro} obtenerLibros={obtenerLibros}/>
+                <FormularioLibro
+                    libroProp={libro} 
+                    setLibroProp={setLibro}
+                    createData={createBook} 
+                    updateData={updateBook}
+                    categorias={categorias}/>
+
                 {
                     libros === null ?
                     (<Cargando/>)
                     :
-                    <TablaLibros libros={libros} obtenerLibros={obtenerLibros} seleccionarElemento={(item)=>{editarElemento(item)}} />
+                    <TablaLibros 
+                        libros={libros} 
+                        selectEditBook={setLibro}  
+                        deleteData={deleteBook}/>
                 }
             </>)
 }

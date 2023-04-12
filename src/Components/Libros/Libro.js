@@ -61,7 +61,7 @@ const Libro = ({libro}) => {
                     <label className="col-form-label float-right">Fecha de publicación :</label>
                 </div>
                 <div className='col-2'>
-                    <label className="col-form-label">{libro.fechaPublicacion}</label>
+                    <label className="col-form-label">{libro.fechaPublicacion.split("T")[0]}</label>
                 </div>
                 <div className='col-2'>
                     <button className='btn btn-outline-warning' onClick={()=>volverAtras()}>Regresar</button>
