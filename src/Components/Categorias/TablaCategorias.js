@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const TablaCategorias = ({categorias}) => {
+const TablaCategorias = ({categorias,selectEditCategory,deleteData}) => {
 
     return    (<>
                 <div className='row'>
@@ -40,10 +40,10 @@ const TablaCategorias = ({categorias}) => {
                                                     <td>{item.id}</td>
                                                     <td>{item.nombre}</td>
                                                     <td>
-                                                        <button className='btn btn-success'>Editar</button>
+                                                        <button className='btn btn-success' onClick={()=>selectEditCategory(item)}>Editar</button>
                                                     </td>
                                                     <td>
-                                                        <button className='btn btn-danger'>Eliminar</button>
+                                                        <button className='btn btn-danger' onClick={()=>deleteData(item.id)}>Eliminar</button>
                                                     </td>
                                                 </tr>
                                                 ))  

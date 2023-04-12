@@ -27,11 +27,10 @@ export const getCategoryService = (id) => {
             */
 }
 
-export const addCategoryService = (libro) => {
-    /*
-    return  fetch(urlApi + "Libros", {
+export const addCategoryService = (categoria) => {
+    return  fetch(urlApi + "Categorias", {
                 method: 'POST',
-                body: JSON.stringify(libro),
+                body: JSON.stringify(categoria),
                 headers:{
                 'Content-Type': 'application/json'
                 }
@@ -55,14 +54,12 @@ export const addCategoryService = (libro) => {
                             icon: 'error',
                             title: error
                             }))
-            */
 }
 
-export const updateCategoryService = (libro) => {
-    /*
-    return  fetch(urlApi + "Libros", {
+export const updateCategoryService = (categoria) => {
+    return  fetch(urlApi + "Categorias", {
                 method: 'PUT',
-                body: JSON.stringify(libro),
+                body: JSON.stringify(categoria),
                 headers:{
                 'Content-Type': 'application/json'
                 }
@@ -86,12 +83,10 @@ export const updateCategoryService = (libro) => {
                             icon: 'error',
                             title: error
                             }))
-            */
 }
 
 export const deleteCategoryService = (id) => {
-    /*
-    return  fetch(urlApi + "Libros?idLibro=" + id,{
+    return  fetch(urlApi + "Categorias?idCategoria=" + id,{
                 method: 'DELETE',
                 headers:{
                 'Content-Type': 'application/json'
@@ -104,6 +99,5 @@ export const deleteCategoryService = (id) => {
                             icon: 'error',
                             title: error
                             })
-            })
-            */
+            })    
 }
